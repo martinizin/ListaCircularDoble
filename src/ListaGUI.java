@@ -7,9 +7,10 @@ public class ListaGUI {
     private JButton INSERTARELEMENTOButton;
     private JButton ELIMINARELEMENTOButton;
     private JButton BUSCARELEMENTOButton;
-    private JButton ORDENARYMOSTRARButton;
     private JTextArea textArea1;
     private JPanel pGeneral;
+    private JTextArea textArea2;
+    private JButton ORDENARButton;
     private listaCircularDoble lista;
 
 
@@ -24,10 +25,12 @@ public class ListaGUI {
                     lista.insertar(dato);
                     textArea1.setText("Elemento " + dato + " insertado.");
                     textField1.setText("");  // Limpiar el campo de texto
+
+                    // Actualizar textArea2 para mostrar los elementos actuales de la lista
+                    textArea2.setText(lista.imprimirLista());
                 } catch (NumberFormatException ex) {
                     textArea1.setText("Por favor ingrese un número válido.");
                 }
-
             }
         });
 
@@ -39,8 +42,12 @@ public class ListaGUI {
                     int dato = Integer.parseInt(texto);
                     lista.eliminar(dato);
                     textField1.setText("");  // Limpiar el campo de texto
+                    textArea1.setText("Elemento " + dato + " eliminado.");
+
+                    // Actualizar textArea2 para mostrar los elementos actuales de la lista
+                    textArea2.setText(lista.imprimirLista());
                 } catch (NumberFormatException ex) {
-                    textArea1.setText("Ingrese un valor válido:");
+                    textArea1.setText("Ingrese un valor válido.");
                 }
             }
         });
@@ -61,23 +68,6 @@ public class ListaGUI {
                 } catch (NumberFormatException ex) {
                     textArea1.setText("Ingrese un valor válido.");
                 }
-            }
-        });
-
-        ORDENARYMOSTRARButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String texto = textField1.getText();
-                if (texto.equalsIgnoreCase("ascendente")) {
-                    lista.ordenar(true);  // Orden ascendente
-                    textArea1.setText("Lista ordenada ascendentemente.");
-                } else if (texto.equalsIgnoreCase("descendente")) {
-                    lista.ordenar(false);  // Orden descendente
-                    textArea1.setText("Lista ordenada descendentemente.");
-                } else {
-                    textArea1.setText("Por favor ingrese 'ascendente' o 'descendente' en el campo de texto.");
-                }
-                textField1.setText("");  // Limpiar el campo de texto
             }
         });
     }

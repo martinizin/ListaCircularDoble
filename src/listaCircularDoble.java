@@ -2,7 +2,7 @@ public class listaCircularDoble {
     Nodo cabeza = null;
     Nodo cola = null;
 
-    // Método para insertar un elemento en la lista
+
     public void insertar(int dato) {
         Nodo nuevoNodo = new Nodo(dato);
         if (cabeza == null) {
@@ -19,7 +19,7 @@ public class listaCircularDoble {
         }
     }
 
-    // Método para eliminar un elemento de la lista
+
     public void eliminar(int dato) {
         if (cabeza == null) {
             System.out.println("La lista está vacía.");
@@ -52,7 +52,7 @@ public class listaCircularDoble {
         System.out.println("Elemento no encontrado.");
     }
 
-    // Función de búsqueda avanzada (por ejemplo, verificar si el valor está en la lista)
+
     public boolean buscar(int dato) {
         if (cabeza == null) {
             return false;
@@ -69,7 +69,7 @@ public class listaCircularDoble {
         return false;
     }
 
-    // Algoritmo de ordenamiento táctico ascendente/descendente
+
     public void ordenar(boolean ascendente) {
         if (cabeza == null || cabeza.siguiente == cabeza) {
             return;  // Lista vacía o con un solo elemento
@@ -91,22 +91,33 @@ public class listaCircularDoble {
                 actual = actual.siguiente;
             } while (actual != cabeza);
         } while (intercambiado);
-
-        System.out.println("Lista ordenada " + (ascendente ? "ascendentemente" : "descendentemente"));
     }
 
-    // Método para imprimir la lista (útil para visualizar)
-    public void imprimirLista() {
+
+    public listaCircularDoble copiarLista() {
+        listaCircularDoble copia = new listaCircularDoble();
+        if (cabeza != null) {
+            Nodo actual = cabeza;
+            do {
+                copia.insertar(actual.dato);
+                actual = actual.siguiente;
+            } while (actual != cabeza);
+        }
+        return copia;
+    }
+
+
+    public String imprimirLista() {
         if (cabeza == null) {
-            System.out.println("La lista está vacía.");
-            return;
+            return "La lista está vacía.";
         }
 
+        StringBuilder sb = new StringBuilder();
         Nodo actual = cabeza;
         do {
-            System.out.print(actual.dato + " ");
+            sb.append(actual.dato).append(" ");
             actual = actual.siguiente;
         } while (actual != cabeza);
-        System.out.println();
+        return sb.toString();
     }
 }
