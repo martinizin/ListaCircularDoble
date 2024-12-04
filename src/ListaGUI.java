@@ -11,6 +11,7 @@ public class ListaGUI {
     private JPanel pGeneral;
     private JTextArea textArea2;
     private JButton ORDENARButton;
+    private JButton LIMPIARButton;
     private listaCircularDoble lista;
 
 
@@ -70,6 +71,25 @@ public class ListaGUI {
                 }
             }
         });
+        ORDENARButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lista.ordenar();
+                actualizarResultado();
+            }
+
+        });
+        LIMPIARButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea1.setText("");
+                textArea2.setText("");
+
+            }
+        });
+    }
+    private void actualizarResultado() {
+        textArea2.setText("Lista: " + lista.imprimirLista());
     }
 
     public static void main(String[] args) {

@@ -29,13 +29,13 @@ public class listaCircularDoble {
         Nodo actual = cabeza;
         do {
             if (actual.dato == dato) {
-                if (actual == cabeza && actual == cola) {  // Caso único (solo un nodo)
+                if (actual == cabeza && actual == cola) {
                     cabeza = cola = null;
-                } else if (actual == cabeza) {  // Caso de eliminación en el inicio
+                } else if (actual == cabeza) {
                     cabeza = actual.siguiente;
                     cabeza.anterior = cola;
                     cola.siguiente = cabeza;
-                } else if (actual == cola) {  // Caso de eliminación en el final
+                } else if (actual == cola) {
                     cola = actual.anterior;
                     cola.siguiente = cabeza;
                     cabeza.anterior = cola;
@@ -57,7 +57,6 @@ public class listaCircularDoble {
         if (cabeza == null) {
             return false;
         }
-
         Nodo actual = cabeza;
         do {
             if (actual.dato == dato) {
@@ -65,34 +64,27 @@ public class listaCircularDoble {
             }
             actual = actual.siguiente;
         } while (actual != cabeza);
-
         return false;
     }
 
 
-    public void ordenar(boolean ascendente) {
-        if (cabeza == null || cabeza.siguiente == cabeza) {
-            return;  // Lista vacía o con un solo elemento
-        }
 
-        boolean intercambiado;
-        do {
-            intercambiado = false;
-            Nodo actual = cabeza;
-            do {
-                if ((ascendente && actual.dato > actual.siguiente.dato) ||
-                        (!ascendente && actual.dato < actual.siguiente.dato)) {
-                    // Intercambiar los datos
-                    int temp = actual.dato;
-                    actual.dato = actual.siguiente.dato;
-                    actual.siguiente.dato = temp;
-                    intercambiado = true;
+    public void ordenar() { //Me guie con el metodo Insertion Sort de las diapositivas porque estaba teniendo problemas con el ordenamiento
+            if (cabeza == null || cabeza.siguiente == cabeza) return;
+            Nodo nodoOrdenado = cabeza.siguiente;
+
+            while (nodoOrdenado != cabeza) {
+                int key = nodoOrdenado.dato;
+                Nodo temp = nodoOrdenado.anterior;
+
+                while (temp != cabeza.anterior && temp.dato > key) {
+                    temp.siguiente.dato = temp.dato;
+                    temp = temp.anterior;
                 }
-                actual = actual.siguiente;
-            } while (actual != cabeza);
-        } while (intercambiado);
-    }
-
+                temp.siguiente.dato = key;
+                nodoOrdenado = nodoOrdenado.siguiente;
+            }
+        }
 
     public listaCircularDoble copiarLista() {
         listaCircularDoble copia = new listaCircularDoble();
